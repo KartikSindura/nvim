@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -92,7 +91,6 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
-
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
@@ -144,7 +142,8 @@ vim.opt.splitbelow = true
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
@@ -231,6 +230,13 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-surround',
   'ThePrimeagen/vim-be-good',
+  -- {
+  --   'jose-elias-alvarez/null-ls.nvim',
+  --   ft = 'go',
+  --   opts = function()
+  --     return require 'custom.plugins.null-ls'
+  --   end,
+  -- },
   {
     'echasnovski/mini.starter',
     version = '*',
@@ -241,7 +247,12 @@ require('lazy').setup({
       }
     end,
   },
-
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end,
+  },
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
   -- keys can be used to configure plugin behavior/loading/etc.
@@ -580,6 +591,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
+        -- ast_grep = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -606,6 +618,8 @@ require('lazy').setup({
             },
           },
         },
+        clangd = {},
+        gopls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -676,6 +690,7 @@ require('lazy').setup({
         javascriptreact = { 'prettierd' },
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
+        cpp = { 'clang-format' },
       },
     },
   },
@@ -720,7 +735,25 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      local s = luasnip.snippet
+      local t = luasnip.text_node
+      local i = luasnip.insert_node
       luasnip.config.setup {}
+      luasnip.add_snippets('cpp', {
+        s('bits', {
+          t {
+            '#include <bits/stdc++.h>',
+            'using namespace std;',
+            'typedef long long ll;',
+            '#define lp(i, n) for (int i = 0; i < n; i++)',
+            '',
+            'int main() {',
+            '    ',
+          },
+          i(0),
+          t { '', '}' },
+        }),
+      })
 
       cmp.setup {
         snippet = {
@@ -768,16 +801,16 @@ require('lazy').setup({
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          -- ['<C-l>'] = cmp.mapping(function()
-          --   if luasnip.expand_or_locally_jumpable() then
-          --     luasnip.expand_or_jump()
-          --   end
-          -- end, { 'i', 's' }),
-          -- ['<C-h>'] = cmp.mapping(function()
-          --   if luasnip.locally_jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   end
-          -- end, { 'i', 's' }),
+          ['<A-l>'] = cmp.mapping(function()
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            end
+          end, { 'i', 's' }),
+          ['<A-h>'] = cmp.mapping(function()
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            end
+          end, { 'i', 's' }),
 
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -807,6 +840,12 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+      require('material').setup {
+        disable = {
+          background = true,
+        },
+      }
+
       vim.g.material_style = 'deep ocean'
       vim.cmd.colorscheme 'material'
       --Lua:
