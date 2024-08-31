@@ -155,6 +155,7 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+--
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
@@ -278,6 +279,7 @@ require('lazy').setup({
     },
   },
   require 'custom.plugins.nvim-ts-autotag',
+  require 'custom.plugins.comptitest',
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -746,6 +748,7 @@ require('lazy').setup({
             'using namespace std;',
             'typedef long long ll;',
             '#define lp(i, n) for (int i = 0; i < n; i++)',
+            '#define lps(start, n) for (int i = start; i <= n; i++)',
             '',
             'int main() {',
             '    ',
