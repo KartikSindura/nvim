@@ -1,4 +1,4 @@
---[[
+--[[in
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -29,10 +29,6 @@ What is Kickstart?
 
     Once you've done that, you can start exploring, configuring and tinkering to
     make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
-
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
       - https://learnxinyminutes.com/docs/lua/
 
     After understanding a bit more about Lua, you can use `:help lua-guide` as a
@@ -581,6 +577,7 @@ require('lazy').setup({
       --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      -- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -603,7 +600,21 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
+        tsserver = {},
+        html = {
+          capabilities = capabilities,
+          init_options = {
+            configurationSection = { 'html', 'css', 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+            embeddedLanguages = {
+              css = true,
+              javascript = true,
+              typescript = true,
+              javascriptreact = true,
+              typescriptreact = true,
+            },
+            provideFormatter = true,
+          },
+        },
         --
 
         lua_ls = {
@@ -787,9 +798,9 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
-          --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          ['<CR>'] = cmp.mapping.confirm { select = true },
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display

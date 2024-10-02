@@ -8,7 +8,7 @@ return {
     },
     per_filetype = {
       ['html'] = {
-        enable_close = false,
+        enable_close = true,
       },
     },
   },
