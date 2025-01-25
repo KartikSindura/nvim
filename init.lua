@@ -159,6 +159,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>ld', vim.diagnostic.open_float, { desc = 'Open diagnostic float' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -600,8 +601,9 @@ require('lazy').setup({
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        ts_ls = {},
         html = {
+
           capabilities = capabilities,
           init_options = {
             configurationSection = { 'html', 'css', 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
@@ -743,11 +745,13 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'mlaursen/vim-react-snippets',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      require('vim-react-snippets').lazy_load()
       local s = luasnip.snippet
       local t = luasnip.text_node
       local i = luasnip.insert_node
@@ -765,7 +769,20 @@ require('lazy').setup({
             '    ',
           },
           i(0),
-          t { '', '}' },
+          t {
+            '',
+            '}',
+            '',
+            '// Think on paper, not on code.',
+            '// Read problem statement twice.',
+            '// Think pictorially.',
+            '',
+            '// Range overlap check => !(b<c || d<a)',
+            '// cout << setprecision(int);',
+            '// cout << num;',
+            '// or cout << fixed << setprecision(int) << num;',
+            '// Look for monotonic behaviour -> binary search',
+          },
         }),
       })
 
