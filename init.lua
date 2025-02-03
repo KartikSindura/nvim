@@ -228,13 +228,6 @@ require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-surround',
   'ThePrimeagen/vim-be-good',
-  -- {
-  --   'jose-elias-alvarez/null-ls.nvim',
-  --   ft = 'go',
-  --   opts = function()
-  --     return require 'custom.plugins.null-ls'
-  --   end,
-  -- },
   {
     'echasnovski/mini.starter',
     version = '*',
@@ -875,6 +868,11 @@ require('lazy').setup({
         disable = {
           background = true,
         },
+        custom_colors = function(colors)
+          -- Modify the colors table to set your custom colors
+          -- Add more customizations as needed
+          colors.syntax.comments = '#5c637b'
+        end,
       }
 
       vim.g.material_style = 'deep ocean'
@@ -885,7 +883,6 @@ require('lazy').setup({
       vim.cmd.hi 'Comment gui=italic'
     end,
   },
-
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -949,7 +946,7 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
