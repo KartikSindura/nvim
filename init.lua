@@ -270,6 +270,7 @@ require('lazy').setup({
   },
   require 'custom.plugins.nvim-ts-autotag',
   require 'custom.plugins.comptitest',
+  require 'custom.plugins.lush',
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -872,6 +873,8 @@ require('lazy').setup({
           -- Modify the colors table to set your custom colors
           -- Add more customizations as needed
           colors.syntax.comments = '#5c637b'
+          colors.editor.line_numbers = '#5c637b'
+          colors.editor.selection = '#373d5b'
         end,
       }
 
