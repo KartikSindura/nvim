@@ -3,13 +3,14 @@ return {
   dependencies = 'MunifTanjim/nui.nvim',
   config = function()
     require('competitest').setup {
-      testcases_use_single_file = true,
       compile_command = {
         cpp = { exec = 'g++', args = { '-Wall', '$(FNAME)', '--std=c++20' } },
       },
       run_command = {
         cpp = { exec = './a.out' },
       },
+      testcases_use_single_file = true,
+      save_current_file = true,
       testcases_directory = '../testcases',
     }
 
@@ -19,5 +20,6 @@ return {
     vim.keymap.set('n', '<leader>su', '<cmd>CompetiTest show_ui<CR>', { desc = '[S]how [U]I' })
     vim.keymap.set('n', '<leader>at', '<cmd>CompetiTest add_testcase<CR>', { desc = '[A]dd [T]estcase' })
     vim.keymap.set('n', '<leader>dt', '<cmd>CompetiTest delete_testcase<CR>', { desc = '[D]elete [T]estcase' })
+    vim.keymap.set('n', '<leader>et', '<cmd>CompetiTest edit_testcase<CR>', { desc = '[E]dit [T]estcase' })
   end,
 }

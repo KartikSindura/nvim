@@ -48,7 +48,7 @@ Kickstart Guide:
 
     (If you already know the Neovim basics, you can skip this step.)
 
-  Once you've completed that, you can continue working through **AND READING** the rest
+  Once you've /completed that, you can continue working through **AND READING** the rest
   of the kickstart init.lua.
 
   Next, run AND READ `:help`.
@@ -269,7 +269,7 @@ require('lazy').setup({
     },
   },
   require 'custom.plugins.nvim-ts-autotag',
-  require 'custom.plugins.comptitest',
+  require 'custom.plugins.competitest',
   require 'custom.plugins.lush',
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
