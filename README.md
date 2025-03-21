@@ -4,7 +4,7 @@
 mv ~/.config/nvim ~/.config/nvim.bak
 
 # Clone the repo
-git clone https://github.com/KartikSindura/kickstarter-nvim-config.git ~/.config/nvim
+git clone https://github.com/KartikSindura/nvim.git ~/.config/nvim
 
 # Start Neovim
 nvim
