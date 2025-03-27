@@ -70,6 +70,7 @@ return { -- Autocompletion
           '// cout << num;',
           '// or cout << fixed << setprecision(int) << num;',
           '// Look for monotonic behaviour -> binary search',
+          '// Condition for checking cliques -> edge != (1LL * vertex * (vertex - 1)) / 2',
         },
       }),
     })

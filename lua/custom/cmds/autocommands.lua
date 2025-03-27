@@ -12,17 +12,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-if vim.fn.exists '$TMUX' then
-  vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost', 'BufNewFile' }, {
-    callback = function()
-      local current_file = vim.fn.expand '%:t'
-      vim.fn.system(string.format('tmux rename-window "%s"', current_file))
-    end,
-  })
-
-  vim.api.nvim_create_autocmd({ 'VimLeave' }, {
-    callback = function()
-      vim.fn.system(string.format 'tmux rename-window fish')
-    end,
-  })
-end
+-- if vim.fn.exists '$TMUX' then
+--   vim.api.nvim_create_autocmd({ 'BufReadPost', 'FileReadPost', 'BufNewFile' }, {
+--     callback = function()
+--       local current_file = vim.fn.expand '%:t'
+--       vim.fn.system(string.format('tmux rename-window "%s"', current_file))
+--     end,
+--   })
+--
+--   vim.api.nvim_create_autocmd({ 'VimLeave' }, {
+--     callback = function()
+--       vim.fn.system(string.format 'tmux rename-window fish')
+--     end,
+--   })
+-- end
