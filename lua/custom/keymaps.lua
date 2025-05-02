@@ -30,6 +30,10 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Scrolling
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down half a page' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up half a page' })
+
 -- Moving while in insert mode
 vim.keymap.set('i', '<C-j>', '<DOWN>')
 vim.keymap.set('i', '<C-k>', '<UP>')
@@ -42,7 +46,9 @@ vim.keymap.set('n', '<leader>ms', ':lua require("mini.starter").open()<CR>', { d
 -- Table of print statement formats by language
 local print_formats = {
   javascript = 'console.log("%s: ", %s);',
+  javascriptreact = 'console.log("%s: ", %s);',
   typescript = 'console.log("%s: ", %s);',
+  typescriptreact = 'console.log("%s: ", %s);',
   python = 'print("%s: ", %s)',
   lua = 'print("%s: ", %s)',
   go = 'fmt.Println("%s: ", %s)',
