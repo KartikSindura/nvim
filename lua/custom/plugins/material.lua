@@ -20,6 +20,11 @@ return { -- You can easily change to a different colorscheme.
         colors.editor.line_numbers = '#5c637b'
         colors.editor.selection = '#373d5b'
       end,
+      custom_highlights = function(colors)
+        return {
+          FloatBorder = { fg = colors.main.border },
+        }
+      end,
     }
 
     vim.g.material_style = 'deep ocean'
