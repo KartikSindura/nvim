@@ -143,6 +143,20 @@ return { -- LSP Configuration & Plugins
         end
       end,
     })
+    -- lua/custom/lsp.lua
+    vim.diagnostic.config { float = { border = 'rounded' } }
+
+    do
+      local border = 'rounded'
+      local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = opts.border or border
+        return orig_util_open_floating_preview(contents, syntax, opts, ...)
+      end
+    end
+
+    require('lspconfig.ui.windows').default_options.border = 'rounded'
 
     -- LSP servers and clients are able to communicate to each other what features they support.
     --  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -173,23 +187,23 @@ return { -- LSP Configuration & Plugins
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`tsserver`) will work just fine
-      pylsp = {},
-      ts_ls = {},
-      html = {
-
-        capabilities = capabilities,
-        init_options = {
-          configurationSection = { 'html', 'css', 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
-          embeddedLanguages = {
-            css = true,
-            javascript = true,
-            typescript = true,
-            javascriptreact = true,
-            typescriptreact = true,
-          },
-          provideFormatter = true,
-        },
-      },
+      -- pylsp = {},
+      -- ts_ls = {},
+      -- html = {
+      --
+      --   capabilities = capabilities,
+      --   init_options = {
+      --     configurationSection = { 'html', 'css', 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+      --     embeddedLanguages = {
+      --       css = true,
+      --       javascript = true,
+      --       typescript = true,
+      --       javascriptreact = true,
+      --       typescriptreact = true,
+      --     },
+      --     provideFormatter = true,
+      --   },
+      -- },
       --
 
       lua_ls = {
@@ -207,7 +221,7 @@ return { -- LSP Configuration & Plugins
         },
       },
       clangd = {},
-      gopls = {},
+      -- gopls = {},
     }
 
     -- Ensure the servers and tools above are installed
@@ -216,6 +230,14 @@ return { -- LSP Configuration & Plugins
     --    :Mason
     --
     --  You can press `g?` for help in this menu.
+    local custom = {
+      rust_analyzer = {},
+    }
+
+    for k, v in pairs(custom) do
+      require('lspconfig')[k].setup(v)
+    end
+
     require('mason').setup()
 
     -- You can add other tools here that you want Mason to install

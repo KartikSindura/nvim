@@ -10,24 +10,24 @@ if not vim.uv.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- Force LSP floating windows to use a border
-local border = 'rounded' -- or 'single', 'double', 'shadow', 'none'
-
--- Hover and Signature Help
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = border,
-})
-
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = border,
-})
-
--- Diagnostics Float
-vim.diagnostic.config {
-  float = {
-    border = border,
-  },
-}
+-- -- Force LSP floating windows to use a border
+-- local border = 'rounded' -- or 'single', 'double', 'shadow', 'none'
+--
+-- -- Hover and Signature Help
+-- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+--   border = border,
+-- })
+--
+-- vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+--   border = border,
+-- })
+--
+-- -- Diagnostics Float
+-- vim.diagnostic.config {
+--   float = {
+--     border = border,
+--   },
+-- }
 
 require('lazy').setup({
   { import = 'custom.plugins' },
