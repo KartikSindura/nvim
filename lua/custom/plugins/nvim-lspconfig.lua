@@ -144,7 +144,17 @@ return { -- LSP Configuration & Plugins
       end,
     })
     -- lua/custom/lsp.lua
-    vim.diagnostic.config { float = { border = 'rounded' } }
+    vim.diagnostic.config {
+      virtual_text = {
+        prefix = '●', -- Could be "●", "▎", "x"
+        spacing = 2,
+      },
+      signs = true, -- show in the gutter (left column)
+      underline = true, -- squiggly underlines
+      update_in_insert = false,
+      severity_sort = true,
+      float = { border = 'rounded' },
+    }
 
     do
       local border = 'rounded'
@@ -231,7 +241,30 @@ return { -- LSP Configuration & Plugins
     --
     --  You can press `g?` for help in this menu.
     local custom = {
-      rust_analyzer = {},
+      rust_analyzer = {
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = {
+              allFeatures = true,
+              extraArgs = { '--config', '.cargo/config.local.toml' },
+            },
+            -- checkOnSave = {
+            --   command = 'clippy',
+            -- },
+            inlayHints = {
+              enable = true,
+              typeHints = true,
+              parameterHints = true,
+              chainingHints = true,
+              closingBraceHints = true,
+              lifetimeElisionHints = {
+                enable = true,
+                useParameterNames = true,
+              },
+            },
+          },
+        },
+      },
     }
 
     for k, v in pairs(custom) do
